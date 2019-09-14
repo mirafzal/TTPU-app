@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1077857311917",
+    "firebase_url": "https://ttpu-app.firebaseio.com",
+    "project_id": "ttpu-app",
+    "storage_bucket": "ttpu-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1077857311917:android:86a4542e4c8e8cb56cfa24",
+        "android_client_info": {
+          "package_name": "uz.mirafzal.ttpuapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1077857311917-l2c2nebarr22kimp8fm0ahnmnr9c64u7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "uz.mirafzal.ttpuapp",
+            "certificate_hash": "d2b5d814fa7f57ae0a8d32d7c185eab69c038407"
+          }
+        },
+        {
+          "client_id": "1077857311917-uai47e74krffbvip9imcmigncf1tf7fh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDV8IFSUDyzarQljgZ2F1ymlAO1xoIGXnA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1077857311917-uai47e74krffbvip9imcmigncf1tf7fh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
