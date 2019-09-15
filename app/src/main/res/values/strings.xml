@@ -23,4 +23,102 @@
     <string name="room">Room</string>
     <string name="time">Time</string>
     <string name="teacher">Teacher</string>
+
+    <string-array name="fromtime">
+        <item>8:30</item>
+        <item>10:00</item>
+        <item>11:30</item>
+        <item>13:50</item>
+        <item>15:20</item>
+    </string-array>
+
+    <string-array name="totime">
+        <item>9:50</item>
+        <item>11:20</item>
+        <item>12:50</item>
+        <item>15:10</item>
+        <item>16:40</item>
+    </string-array>
+
+    <string-array name="fromtimeprep">
+        <item>8:30</item>
+        <item>10:00</item>
+        <item>12:20</item>
+        <item>13:50</item>
+        <item>15:20</item>
+    </string-array>
+
+    <string-array name="totimeprep">
+        <item>9:50</item>
+        <item>11:20</item>
+        <item>13:40</item>
+        <item>15:10</item>
+        <item>16:40</item>
+    </string-array>
+
+    <string-array name="courses">
+        <item>Preparatory</item>
+        <item>First level</item>
+        <item>Second level</item>
+        <item>Third level</item>
+    </string-array>
+
+    <string-array name="groupPrep">
+        <item>G1–19</item>
+        <item>G2–19</item>
+        <item>G3–19</item>
+        <item>G4–19</item>
+        <item>G5–19</item>
+        <item>G6–19</item>
+        <item>G7–19</item>
+        <item>G8–19</item>
+        <item>G9–19</item>
+        <item>G10–18</item>
+        <item>G11–18</item>
+        <item>G12–18</item>
+        <item>G13–18</item>
+        <item>G14–19</item>
+        <item>G15–19</item>
+        <item>G16–19</item>
+        <item>G17–19</item>
+        <item>G18–19</item>
+        <item>G19–19</item>
+        <item>G20–19</item>
+    </string-array>
+
+    <string-array name="groupFirst">
+        <item>ME1–18</item>
+        <item>ME2–18</item>
+        <item>ME3–18</item>
+        <item>ME4–18</item>
+        <item>ME5–18</item>
+        <item>ME6–18</item>
+        <item>CIE1–18</item>
+        <item>CIE2–18</item>
+        <item>IT1–18</item>
+        <item>IT2–18</item>
+        <item>IT3–18</item>
+        <item>IT4–18</item>
+    </string-array>
+
+    <string-array name="groupSecond">
+        <item>ME1</item>
+        <item>ME2</item>
+        <item>ME3</item>
+        <item>ME4</item>
+        <item>E</item>
+        <item>CIE</item>
+        <item>IT</item>
+    </string-array>
+
+    <string-array name="groupThird">
+        <item>ME1</item>
+        <item>ME2</item>
+        <item>ME3</item>
+        <item>ME4</item>
+        <item>E</item>
+        <item>CIE</item>
+        <item>IT</item>
+    </string-array>
+
 </resources>

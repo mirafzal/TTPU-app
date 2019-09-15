@@ -6,7 +6,7 @@
     tools:context=".fragments.MondayFragment">
 
     <ListView
-        android:id="@+id/mondaylist"
+        android:id="@+id/mondayList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:listSelector="@android:color/transparent"

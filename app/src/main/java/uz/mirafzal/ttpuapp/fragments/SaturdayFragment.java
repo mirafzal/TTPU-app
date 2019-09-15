@@ -2,20 +2,23 @@ package uz.mirafzal.ttpuapp.fragments;
 
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.Fragment;
+
+import java.util.Objects;
+
 import uz.mirafzal.ttpuapp.R;
+import uz.mirafzal.ttpuapp.utils.FirestoreHelper;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class SaturdayFragment extends Fragment {
 
+    private static final String DAY = "Saturday";
 
     public SaturdayFragment() {
         // Required empty public constructor
@@ -26,7 +29,11 @@ public class SaturdayFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_saturday, container, false);
+        View view =  inflater.inflate(R.layout.fragment_saturday, container, false);
+
+        FirestoreHelper.setAdapter(Objects.requireNonNull(getActivity()), DAY);
+
+        return view;
     }
 
 }
