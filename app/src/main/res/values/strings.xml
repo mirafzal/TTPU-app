@@ -11,8 +11,6 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="monday">Monday</string>
     <string name="tuesday">Tuesday</string>
     <string name="wednesday">Wednesday</string>
@@ -64,41 +62,41 @@
     </string-array>
 
     <string-array name="groupPrep">
-        <item>G1–19</item>
-        <item>G2–19</item>
-        <item>G3–19</item>
-        <item>G4–19</item>
-        <item>G5–19</item>
-        <item>G6–19</item>
-        <item>G7–19</item>
-        <item>G8–19</item>
-        <item>G9–19</item>
-        <item>G10–18</item>
-        <item>G11–18</item>
-        <item>G12–18</item>
-        <item>G13–18</item>
-        <item>G14–19</item>
-        <item>G15–19</item>
-        <item>G16–19</item>
-        <item>G17–19</item>
-        <item>G18–19</item>
-        <item>G19–19</item>
-        <item>G20–19</item>
+        <item>G1-19</item>
+        <item>G2-19</item>
+        <item>G3-19</item>
+        <item>G4-19</item>
+        <item>G5-19</item>
+        <item>G6-19</item>
+        <item>G7-19</item>
+        <item>G8-19</item>
+        <item>G9-19</item>
+        <item>G10-18</item>
+        <item>G11-18</item>
+        <item>G12-18</item>
+        <item>G13-18</item>
+        <item>G14-19</item>
+        <item>G15-19</item>
+        <item>G16-19</item>
+        <item>G17-19</item>
+        <item>G18-19</item>
+        <item>G19-19</item>
+        <item>G20-19</item>
     </string-array>
 
     <string-array name="groupFirst">
-        <item>ME1–18</item>
-        <item>ME2–18</item>
-        <item>ME3–18</item>
-        <item>ME4–18</item>
-        <item>ME5–18</item>
-        <item>ME6–18</item>
-        <item>CIE1–18</item>
-        <item>CIE2–18</item>
-        <item>IT1–18</item>
-        <item>IT2–18</item>
-        <item>IT3–18</item>
-        <item>IT4–18</item>
+        <item>ME1-18</item>
+        <item>ME2-18</item>
+        <item>ME3-18</item>
+        <item>ME4-18</item>
+        <item>ME5-18</item>
+        <item>ME6-18</item>
+        <item>CIE1-18</item>
+        <item>CIE2-18</item>
+        <item>IT1-18</item>
+        <item>IT2-18</item>
+        <item>IT3-18</item>
+        <item>IT4-18</item>
     </string-array>
 
     <string-array name="groupSecond">

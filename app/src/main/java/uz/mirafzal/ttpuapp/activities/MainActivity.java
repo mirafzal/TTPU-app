@@ -6,6 +6,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -14,19 +15,15 @@ import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import uz.mirafzal.ttpuapp.R;
 import uz.mirafzal.ttpuapp.adapters.FragmentsTabAdapter;
@@ -46,19 +43,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public static final String TAG = "mTag1";
 
-    public static final String KEY_COURSE = "course";
-    public static final String KEY_GROUP = "group";
+    public static final String KEY_COURSE = "uz.mirafzal.ttpuapp.course";
+    public static final String KEY_GROUP = "uz.mirafzal.ttpuapp.group";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        getPreferences(MODE_PRIVATE).edit()
-                .putString(KEY_GROUP, "G1-19")
-                .putInt(KEY_COURSE, 0)
-                .apply();
 
         setupNavigation();
         setupFragments();
@@ -73,10 +65,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 R.array.courses, R.layout.spinner_item);
         adapterCourse.setDropDownViewResource(R.layout.spinner_item);
         spinnerCourse.setAdapter(adapterCourse);
+        int course = getPreferences(MODE_PRIVATE).getInt(KEY_COURSE, 0);
+        spinnerCourse.setSelection(course);
         spinnerCourse.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                getPreferences(MODE_PRIVATE).edit().putInt(KEY_GROUP, i).apply();
+                getPreferences(MODE_PRIVATE).edit().putInt(KEY_COURSE, i).apply();
+                Log.d(TAG, i + " - course");
                 setupSpinnerGroup();
             }
 
@@ -94,6 +89,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         findViewById(R.id.drawer_layout).invalidate();
 
         int course = getPreferences(MODE_PRIVATE).getInt(KEY_COURSE, 0);
+
+        String group = getPreferences(MODE_PRIVATE).getString(KEY_GROUP, "G1-19");
 
         int spinnerArray;
 
@@ -119,10 +116,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 spinnerArray, R.layout.spinner_item);
         adapterGroup.setDropDownViewResource(R.layout.spinner_item);
         spinnerGroup.setAdapter(adapterGroup);
+        spinnerGroup.setSelection(adapterGroup.getPosition(group));
         spinnerGroup.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
+                getPreferences(MODE_PRIVATE).edit().putString(KEY_GROUP, spinnerGroup.getSelectedItem().toString()).apply();
+                Log.d(TAG, spinnerGroup.getSelectedItem().toString() + " - group");
+                // Reload current fragment
+                List<Fragment> fragments = getSupportFragmentManager().getFragments();
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                for (Fragment fragment : fragments) {
+                    fragmentTransaction
+                            .detach(fragment)
+                            .attach(fragment);
+                }
+                fragmentTransaction.commit();
             }
 
             @Override
@@ -159,49 +167,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         adapter.addFragment(new FridayFragment(), getResources().getString(R.string.friday));
         adapter.addFragment(new SaturdayFragment(), getResources().getString(R.string.saturday));
         viewPager.setAdapter(adapter);
-        viewPager.setCurrentItem(day == 1 ? 6 : day - 2, true);
+        viewPager.setCurrentItem(day == 1 ? 0 : day - 2, true);
         tabLayout.setupWithViewPager(viewPager);
-    }
-
-    private void initEmptySchedule() {
-        final String[] groups = {"G1-19", "G2-19", "G3-19", "G4-19", "G5-19", "G6-19", "G7-19", "G8-19", "G9-19", "G10-18",
-                "G11-18", "G12-18", "G13-18", "G14-19", "G15-19", "G16-19", "G17-19", "G18-19", "G19-19", "G20-19",
-                "ME1-18", "ME2-18", "ME3-18", "ME4-18", "ME5-18", "ME6-18", "CIE1-18", "CIE2-18", "IT1-18", "IT2-18", "IT3-18", "IT4-18",
-                "ME1-17", "ME2-17", "ME3-17", "ME4-17", "E-17", "CIE-17", "IT-17",
-                "ME1-16", "ME2-16", "ME3-16", "ME4-16", "E-16", "CIE-16", "IT-16"};
-
-        final String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
-
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        CollectionReference collectionReference = db.collection("TimeTable");
-
-        Map<String, Object> lesson = new HashMap<>();
-        lesson.put("subject", "");
-        lesson.put("teacher", "");
-        lesson.put("room", "");
-
-        for (String group : groups) {
-            DocumentReference documentReference = collectionReference.document(group);
-            for (String day : days) {
-                for (int k = 1; k <= 5; k++) {
-                    documentReference.collection(day).document(k + "")
-                            .set(lesson)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    Log.d(TAG, "DocumentSnapshot successfully written!");
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Log.w(TAG, "Error writing document", e);
-                                }
-                            });
-                }
-            }
-        }
     }
 
     @Override
@@ -218,37 +185,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         final NavigationView navigationView = findViewById(R.id.nav_view);
         switch (item.getItemId()) {
-//            case R.id.schoolwebsitemenu:
-//                String schoolWebsite = "polito.uz";//PreferenceManager.getDefaultSharedPreferences(this).getString(SettingsActivity.KEY_SCHOOL_WEBSITE_SETTING, null);
-//                if (!TextUtils.isEmpty(schoolWebsite)) {
-//                    //openUrlInChromeCustomTab(getApplicationContext(), schoolWebsite);
-////                    Snackbar.make(navigationView, "GG", Snackbar.LENGTH_SHORT).show();
-//                } else {
-////                    Snackbar.make(navigationView, R.string.school_website_snackbar, Snackbar.LENGTH_SHORT).show();
-//                }
-//                return true;
-//            case R.id.exams:
-//                Intent exams = new Intent(MainActivity.this, ExamsActivity.class);
-//                startActivity(exams);
-//                return true;
-//            case R.id.teachers:
-//                Intent teacher = new Intent(MainActivity.this, TeachersActivity.class);
-//                startActivity(teacher);
-//                return true;
-//            case R.id.homework:
-//                Intent homework = new Intent(MainActivity.this, HomeworksActivity.class);
-//                startActivity(homework);
-//                return true;
-//            case R.id.notes:
-//                Intent note = new Intent(MainActivity.this, NotesActivity.class);
-//                startActivity(note);
-//                return true;
-//            case R.id.settings:
-//                Intent settings = new Intent(MainActivity.this, SettingsActivity.class);
-//                startActivity(settings);
-//                return true;
-            default:
+            case R.id.exams:
+            case R.id.teachers:
+                Toast.makeText(getApplicationContext(), "Coming soon", Toast.LENGTH_SHORT).show();
                 DrawerLayout drawer = findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
+                return true;
+            case R.id.settings:
+                Toast.makeText(getApplicationContext(), "Currently no settings", Toast.LENGTH_SHORT).show();
+                drawer = findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
+                return true;
+            default:
+                drawer = findViewById(R.id.drawer_layout);
                 drawer.closeDrawer(GravityCompat.START);
                 return true;
         }
