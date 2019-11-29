@@ -27,12 +27,7 @@ import java.util.List;
 
 import uz.mirafzal.ttpuapp.R;
 import uz.mirafzal.ttpuapp.adapters.FragmentsTabAdapter;
-import uz.mirafzal.ttpuapp.fragments.FridayFragment;
-import uz.mirafzal.ttpuapp.fragments.MondayFragment;
-import uz.mirafzal.ttpuapp.fragments.SaturdayFragment;
-import uz.mirafzal.ttpuapp.fragments.ThursdayFragment;
-import uz.mirafzal.ttpuapp.fragments.TuesdayFragment;
-import uz.mirafzal.ttpuapp.fragments.WednesdayFragment;
+import uz.mirafzal.ttpuapp.fragments.TimetablesFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -160,12 +155,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         Calendar calendar = Calendar.getInstance();
         int day = calendar.get(Calendar.DAY_OF_WEEK);
-        adapter.addFragment(new MondayFragment(), getResources().getString(R.string.monday));
-        adapter.addFragment(new TuesdayFragment(), getResources().getString(R.string.tuesday));
-        adapter.addFragment(new WednesdayFragment(), getResources().getString(R.string.wednesday));
-        adapter.addFragment(new ThursdayFragment(), getResources().getString(R.string.thursday));
-        adapter.addFragment(new FridayFragment(), getResources().getString(R.string.friday));
-        adapter.addFragment(new SaturdayFragment(), getResources().getString(R.string.saturday));
+        adapter.addFragment(TimetablesFragment.newInstance("Monday"), getResources().getString(R.string.monday));
+        adapter.addFragment(TimetablesFragment.newInstance("Tuesday"), getResources().getString(R.string.tuesday));
+        adapter.addFragment(TimetablesFragment.newInstance("Wednesday"), getResources().getString(R.string.wednesday));
+        adapter.addFragment(TimetablesFragment.newInstance("Thursday"), getResources().getString(R.string.thursday));
+        adapter.addFragment(TimetablesFragment.newInstance("Friday"), getResources().getString(R.string.friday));
+        adapter.addFragment(TimetablesFragment.newInstance("Saturday"), getResources().getString(R.string.saturday));
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(day == 1 ? 0 : day - 2, true);
         tabLayout.setupWithViewPager(viewPager);

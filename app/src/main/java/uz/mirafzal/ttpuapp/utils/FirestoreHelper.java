@@ -61,29 +61,7 @@ public class FirestoreHelper {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         ArrayList<Week> weekList = new ArrayList<>();
-                        ListView listView;
-                        switch (day) {
-                            case "Monday":
-                                listView = activity.findViewById(R.id.mondayList);
-                                break;
-                            case "Tuesday":
-                                listView = activity.findViewById(R.id.tuesdayList);
-                                break;
-                            case "Wednesday":
-                                listView = activity.findViewById(R.id.wednesdayList);
-                                break;
-                            case "Thursday":
-                                listView = activity.findViewById(R.id.thursdayList);
-                                break;
-                            case "Friday":
-                                listView = activity.findViewById(R.id.fridayList);
-                                break;
-                            case "Saturday":
-                                listView = activity.findViewById(R.id.saturdayList);
-                                break;
-                            default:
-                                listView = null;
-                        }
+                        ListView listView = activity.findViewById(R.id.listView);
                         if (task.isSuccessful()) {
                             int i = 0;
                             for (QueryDocumentSnapshot document : requireNonNull(task.getResult())) {
@@ -117,7 +95,7 @@ public class FirestoreHelper {
                 });
     }
 
-    public static void setAdapter(final Activity activity, final String day) {
+    public static void setAdapter(final Activity activity, final String day, final ListView listView) {
 
         final String[] fromTime = activity.getResources().getStringArray(R.array.fromtime);
         final String[] toTime = activity.getResources().getStringArray(R.array.totime);
@@ -150,29 +128,6 @@ public class FirestoreHelper {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         ArrayList<Week> weekList = new ArrayList<>();
-                        ListView listView;
-                        switch (day) {
-                            case "Monday":
-                                listView = activity.findViewById(R.id.mondayList);
-                                break;
-                            case "Tuesday":
-                                listView = activity.findViewById(R.id.tuesdayList);
-                                break;
-                            case "Wednesday":
-                                listView = activity.findViewById(R.id.wednesdayList);
-                                break;
-                            case "Thursday":
-                                listView = activity.findViewById(R.id.thursdayList);
-                                break;
-                            case "Friday":
-                                listView = activity.findViewById(R.id.fridayList);
-                                break;
-                            case "Saturday":
-                                listView = activity.findViewById(R.id.saturdayList);
-                                break;
-                            default:
-                                listView = null;
-                        }
                         if (task.isSuccessful()) {
                             Log.d(TAG, group);
                             for (QueryDocumentSnapshot document : requireNonNull(task.getResult())) {
